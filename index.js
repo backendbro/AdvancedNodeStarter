@@ -4,15 +4,24 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
+const app = express();
 
 require('./models/User');
 require('./models/Blog');
 require('./services/passport');
+require('./services/cache')
 
-mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { useMongoClient: true });
+//mongoose.Promise = global.Promise;
+const connectDb = async () => {
+    const conn = await mongoose.connect(keys.mongoURI, {
+        useNewUrlParser:true,
+        useUnifiedTopology:true,
+       
+    })
+    console.log(`mongodb connected: ${conn.connection.host}`)
+}
+connectDb();
 
-const app = express();
 
 app.use(bodyParser.json());
 app.use(
