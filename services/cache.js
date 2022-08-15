@@ -13,6 +13,7 @@ mongoose.Query.prototype.cache = function(options={}){
     return this;
 }
 
+
 mongoose.Query.prototype.exec = async function(){
    
     if(this.useCache === false){
@@ -43,3 +44,4 @@ module.exports = {
         client.del(JSON.stringify(hashKey))
     }
 }
+

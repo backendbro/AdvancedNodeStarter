@@ -1,0 +1,25 @@
+const Page = require('./helpers/page')
+
+let page; 
+
+    beforeEach(async() => {
+      jest.setTimeout(30000);
+    
+      page = await Page.build()
+      await page.goto('http://localhost:3000')
+    
+    });
+
+    afterEach(async () => {
+    await page.close()
+    })
+    
+    test('Create a new blog', async () => {
+        await page.login()
+        await page.click('a.btn-floating')
+        const label = await page.getContentsOf('form label')
+        expect(label).toEqual('Blog Title')
+    })
+
+
+

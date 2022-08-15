@@ -11,7 +11,7 @@ require('./models/Blog');
 require('./services/passport');
 require('./services/cache')
 
-//mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 const connectDb = async () => {
     const conn = await mongoose.connect(keys.mongoURI, {
         useNewUrlParser:true,
@@ -51,3 +51,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port`, PORT);
 });
+
