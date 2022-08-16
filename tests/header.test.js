@@ -1,8 +1,9 @@
 const Page = require('./helpers/page')
 
 let page; 
-describe('Header tests', () => {
-    beforeEach(async() => {
+    describe('Test for the header', () => {
+    
+      beforeEach(async() => {
       jest.setTimeout(30000);
     
       page = await Page.build()
@@ -26,10 +27,11 @@ describe('Header tests', () => {
       })
       
       test('When signed in, shows logout button', async () => {
-      await page.login()
+      await page.login_v2()
       const text = await page.getContentsOf('a[href="/auth/logout"]')
       expect(text).toEqual('Logout')
     })
 
-    });
+    
 
+    })
