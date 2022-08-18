@@ -75,30 +75,28 @@ let page;
     
     // Another top level describe statement 
     describe("User is not logged in", () => {
-      test('User cannot create blogs unless loggedIn', async () => {
-            const result = await page.evaluate(() => {
-                return fetch('/api/blogs', {
-                  method:'POST',
-                  credentials:'same-origin',
-                  headers: {'Content-Type':'application/json'},
-                  body:JSON.stringify({title:"My Newest Title", content:"My newest content"})
-                })
-                .then(res => res.json())
-                })
-              expect(result).toEqual({error: "You must log in!"})
-          })  
-          
+      
+      const actions = [
+        {
+          method:"get",
+          path: '/api/blogs'
+        },
+        {
+          method:'post',
+          path:'/api/blogs',
+          data: {
+            title:'T',
+            content:'C'
+          }
+        }
+      ]
 
-          test('User cannot view blogs unless loggedIn', async () => {
-            const result = await page.evaluate(()=> {
-              return fetch('/api/blogs', {
-                method:'GET',
-                credentials:'same-origin'
-              })
-              .then(res => res.json())
-            })
-          expect(result).toEqual({error: "You must log in!"})
-          })
+      test('Blog related actions', async () => {
+        const results = await page.execRequests(actions)
+        for(let result of results){
+          expect(result).toEqual({error:'You must log in!'})
+        }
+      })
 
 
       })
