@@ -4,4 +4,5 @@ module.exports = {
   googleClientSecret: '8mkniDQOqacXtlRD3gA4n2az',
   mongoURI: 'mongodb+srv://backendo_mafiaso:8JSREOYCV6hlw9nE@cluster0.ylnpmuz.mongodb.net/?retryWrites=true&w=majority',
   cookieKey: '123123123',
+  redisUrl: "redis://127:0.0.1:6379"
 };
